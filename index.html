@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback Form | Premium UI</title>
+    <title>Feedback Stellar | Conectado</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -19,8 +19,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-page);
-            background-image: 
-                radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
             background-size: 40px 40px;
             color: var(--text-main);
             display: flex;
@@ -67,7 +66,6 @@
 
         input:focus { outline: none; border-color: var(--primary-accent); box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15); }
 
-        /* Grid das 6 opções de indicação */
         .choice-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -91,14 +89,11 @@
             gap: 8px;
         }
 
-        .choice-label:hover { border-color: var(--primary-accent); background: rgba(139, 92, 246, 0.05); }
-
         input[type="radio"]:checked + .choice-label {
             background-color: var(--primary-accent);
             border-color: var(--primary-accent);
             color: white;
             box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
-            font-weight: 600;
         }
 
         button {
@@ -116,47 +111,63 @@
         }
 
         button:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
+        
+        /* Feedback de sucesso */
+        #success-msg { display: none; text-align: center; color: var(--primary-accent); font-weight: 600; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="form-container">
     <header>
-        <h1>🚀 Feedback Stellar</h1>
-        <p style="color: var(--text-sub); font-size: 0.9rem;">Sua experiência nos ajuda a orbitar melhor.</p>
+        <h1>🚀 Transmissão Stellar</h1>
+        <p style="color: var(--text-sub); font-size: 0.9rem;">Seus dados serão enviados diretamente para a base.</p>
     </header>
 
-    <form id="google-form">
+    <form 
+        id="google-form" 
+        action="https://docs.google.com/forms/d/e/1FAIpQLScy-W8w8x3GxFNc6DRuIQE_7M5XJ3nEkOdovzA/formResponse" 
+        method="POST" 
+        target="hidden_iframe"
+        onsubmit="submitted=true;">
+
         <div class="field-group">
             <label>NOME COMPLETO</label>
-            <input type="text" name="entry.1726815172" placeholder="Como devemos te chamar?" required>
+            <input type="text" name="entry.1726815172" placeholder="Seu nome" required>
         </div>
 
         <div class="field-group">
-            <label>SUA NOTA (1-5)</label>
-            <input type="number" name="entry.1556844384" min="1" max="5" placeholder="4" required>
+            <label>NOTA (1-5)</label>
+            <input type="number" name="entry.1556844384" min="1" max="5" required>
         </div>
 
         <div class="field-group">
-            <label>DETALHE SUA EXPERIÊNCIA</label>
-            <input type="text" name="entry.942555112" placeholder="Conte-nos mais...">
-        </div>
-
-        <div class="field-group">
-            <label>VOCÊ INDICARIA PARA OUTRA PESSOA?</label>
+            <label>VOCÊ INDICARIA?</label>
             <div class="choice-grid">
                 <label><input type="radio" name="entry.1827570106" value="Sim" required><div class="choice-label">✨ Sim</div></label>
-                <label><input type="radio" name="entry.1827570106" value="Com Certeza"><div class="choice-label">🔥 Com Certeza</div></label>
-                <label><input type="radio" name="entry.1827570106" value="Talvez"><div class="choice-label">⚖️ Talvez</div></label>
                 <label><input type="radio" name="entry.1827570106" value="Não"><div class="choice-label">❌ Não</div></label>
+                <label><input type="radio" name="entry.1827570106" value="Talvez"><div class="choice-label">⚖️ Talvez</div></label>
+                <label><input type="radio" name="entry.1827570106" value="Com Certeza"><div class="choice-label">🔥 Com Certeza</div></label>
                 <label><input type="radio" name="entry.1827570106" value="Não Indicaria"><div class="choice-label">🚫 Não Indicaria</div></label>
                 <label><input type="radio" name="entry.1827570106" value="Apenas se melhorar"><div class="choice-label">🛠️ Se melhorar</div></label>
             </div>
         </div>
 
-        <button type="submit">Enviar Transmissão</button>
+        <button type="submit" id="submit-btn">Enviar Transmissão</button>
+        <p id="success-msg">🚀 Resposta enviada com sucesso!</p>
     </form>
 </div>
+
+<script type="text/javascript">var submitted=false;</script>
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccess();}"></iframe>
+
+<script>
+    function showSuccess() {
+        document.getElementById('google-form').reset();
+        document.getElementById('submit-btn').style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+    }
+</script>
 
 </body>
 </html>
