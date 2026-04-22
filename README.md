@@ -1,0 +1,1 @@
+Criação de formulario via google forms para aprender sobre fluxo de dados e como eles interagem com o excel/sheets. Usamos o método de auto preenchimento de formulários para melhorar a UX/UI. Para uma UI+ usamos agentes de IA para reproduzir de maneira rápida e treinar nosso agente
