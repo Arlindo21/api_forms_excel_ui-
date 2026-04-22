@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback Stellar | Conectado</title>
+    <title>Feedback Form | Premium UI</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg-page: #050609;
@@ -41,6 +43,7 @@
         }
 
         header { text-align: center; margin-bottom: 2rem; }
+
         header h1 { 
             font-size: 1.5rem; 
             background: linear-gradient(to right, #fff, var(--primary-accent));
@@ -50,7 +53,14 @@
         }
 
         .field-group { margin-bottom: 1.5rem; }
-        label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 10px; color: var(--text-sub); }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            color: var(--text-sub);
+        }
 
         input[type="text"], input[type="number"] {
             width: 100%;
@@ -64,7 +74,13 @@
             transition: 0.3s;
         }
 
-        input:focus { outline: none; border-color: var(--primary-accent); box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15); }
+        input::placeholder { color: #6b7280; }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+        }
 
         .choice-grid {
             display: grid;
@@ -89,11 +105,17 @@
             gap: 8px;
         }
 
+        .choice-label:hover {
+            border-color: var(--primary-accent);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
         input[type="radio"]:checked + .choice-label {
             background-color: var(--primary-accent);
             border-color: var(--primary-accent);
             color: white;
             box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+            font-weight: 600;
         }
 
         button {
@@ -110,64 +132,87 @@
             transition: 0.3s;
         }
 
-        button:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
-        
-        /* Feedback de sucesso */
-        #success-msg { display: none; text-align: center; color: var(--primary-accent); font-weight: 600; margin-top: 10px; }
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
     </style>
 </head>
+
 <body>
 
 <div class="form-container">
     <header>
-        <h1>🚀 Transmissão Stellar</h1>
-        <p style="color: var(--text-sub); font-size: 0.9rem;">Seus dados serão enviados diretamente para a base.</p>
+        <h1>🚀 Feedback Stellar</h1>
+        <p style="color: var(--text-sub); font-size: 0.9rem;">
+            Sua experiência nos ajuda a orbitar melhor.
+        </p>
     </header>
 
     <form 
-        id="google-form" 
+        id="google-form"
         action="https://docs.google.com/forms/d/e/1FAIpQLSdmsYntgSONDMZHcO498pUQDvkhe4RE7RIdntbkDWjKWIpgIQ/formResponse"
-
-        method="POST" 
+        method="POST"
         target="hidden_iframe"
         onsubmit="submitted=true;">
 
         <div class="field-group">
             <label>NOME COMPLETO</label>
-            <input type="text" name="entry.1726815172" placeholder="Seu nome" required>
+            <input type="text" name="entry.1726815172" placeholder="Como devemos te chamar?" required>
         </div>
 
         <div class="field-group">
-            <label>NOTA (1-5)</label>
-            <input type="number" name="entry.1556844384" min="1" max="5" required>
+            <label>SUA NOTA (0-10)</label>
+            <input type="number" name="entry.1556844384" min="0" max="10" placeholder="8" required>
+        </div>
+
+        <div class="field-group">
+            <label>DETALHE SUA EXPERIÊNCIA</label>
+            <input type="text" name="entry.942555112" placeholder="Conte-nos mais...">
         </div>
 
         <div class="field-group">
             <label>VOCÊ INDICARIA?</label>
             <div class="choice-grid">
                 <label><input type="radio" name="entry.1827570106" value="Sim" required><div class="choice-label">✨ Sim</div></label>
-                <label><input type="radio" name="entry.1827570106" value="Não"><div class="choice-label">❌ Não</div></label>
-                <label><input type="radio" name="entry.1827570106" value="Talvez"><div class="choice-label">⚖️ Talvez</div></label>
                 <label><input type="radio" name="entry.1827570106" value="Com Certeza"><div class="choice-label">🔥 Com Certeza</div></label>
+                <label><input type="radio" name="entry.1827570106" value="Talvez"><div class="choice-label">⚖️ Talvez</div></label>
+                <label><input type="radio" name="entry.1827570106" value="Não"><div class="choice-label">❌ Não</div></label>
                 <label><input type="radio" name="entry.1827570106" value="Não Indicaria"><div class="choice-label">🚫 Não Indicaria</div></label>
                 <label><input type="radio" name="entry.1827570106" value="Apenas se melhorar"><div class="choice-label">🛠️ Se melhorar</div></label>
             </div>
         </div>
 
         <button type="submit" id="submit-btn">Enviar Transmissão</button>
-        <p id="success-msg">🚀 Resposta enviada com sucesso!</p>
     </form>
 </div>
 
-<script type="text/javascript">var submitted=false;</script>
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccess();}"></iframe>
+<script>var submitted = false;</script>
+
+<iframe 
+    name="hidden_iframe" 
+    style="display:none;" 
+    onload="if(submitted){showSuccess();}">
+</iframe>
 
 <script>
-    function showSuccess() {
+function showSuccess() {
+    setTimeout(() => {
         document.getElementById('google-form').reset();
-        document.getElementById('submit-btn').style.display = 'none';
-        document.getElementById('success-msg').style.display = 'block';
-    }
+        const btn = document.getElementById('submit-btn');
+        btn.innerText = "Enviado 🚀";
+        btn.disabled = true;
+    }, 500);
+}
+
+document.getElementById('google-form').addEventListener('submit', () => {
+    const btn = document.getElementById('submit-btn');
+    btn.innerText = 'Enviando...';
+});
 </script>
 
 </body>
